@@ -2,6 +2,7 @@ package com.iparcoc.fuelprices.view
 
 import android.content.Intent
 import android.os.Bundle
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.iparcoc.fuelprices.databinding.ActivityMainBinding
@@ -15,7 +16,8 @@ import org.jetbrains.anko.uiThread
 import retrofit2.converter.gson.GsonConverterFactory
 
 class MainActivity : AppCompatActivity(),
-    androidx.appcompat.widget.SearchView.OnQueryTextListener {
+    androidx.appcompat.widget.SearchView.OnQueryTextListener,
+    RecyclerViewInterface{
 
     private lateinit var binding: ActivityMainBinding
     var estacionesList : ArrayList<EESSTerrestres> = ArrayList()
@@ -45,7 +47,7 @@ class MainActivity : AppCompatActivity(),
 
     private fun initRecyclerView(eessTerrestres: ArrayList<EESSTerrestres>){
         binding.rvEstacionesList.layoutManager = LinearLayoutManager(this)
-        binding.rvEstacionesList.adapter = EstacionesAdapter(eessTerrestres)
+        binding.rvEstacionesList.adapter = EstacionesAdapter(eessTerrestres, this)
     }
 
     private fun getRetrofit(): Retrofit {
@@ -88,6 +90,10 @@ class MainActivity : AppCompatActivity(),
             }
         }
         return false
+    }
+
+    override fun onItemClick(position: Int) {
+        Toast.makeText(this,"Clicked in " + position + " item", Toast.LENGTH_SHORT).show()
     }
 
 

@@ -1,6 +1,7 @@
 package com.iparcoc.fuelprices.view
 
 import android.view.LayoutInflater
+import android.view.View.OnClickListener
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModel
 import androidx.recyclerview.widget.RecyclerView
@@ -8,7 +9,7 @@ import com.iparcoc.fuelprices.R
 import com.iparcoc.fuelprices.model.EESSTerrestres
 
 
-class EstacionesAdapter(private val estaciones: ArrayList<EESSTerrestres>) : RecyclerView.Adapter<EstacionViewHolder>(){
+class EstacionesAdapter(private val estaciones: ArrayList<EESSTerrestres>, private val estacionesClickListener: RecyclerViewInterface) : RecyclerView.Adapter<EstacionViewHolder>(){
 
     var estacionesListFiltered : ArrayList<EESSTerrestres> = ArrayList()
     //var estacionesList : ArrayList<EESSTerrestres> = ArrayList()
@@ -27,6 +28,9 @@ class EstacionesAdapter(private val estaciones: ArrayList<EESSTerrestres>) : Rec
     override fun onBindViewHolder(holder: EstacionViewHolder, position: Int) {
         val item = estacionesListFiltered[position]
         holder.render(item)
+        holder.itemView.setOnClickListener {
+            estacionesClickListener.onItemClick(position)
+        }
     }
 
     override fun getItemCount(): Int {
