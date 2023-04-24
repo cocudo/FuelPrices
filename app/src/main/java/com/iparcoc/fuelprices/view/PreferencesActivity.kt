@@ -1,18 +1,12 @@
 package com.iparcoc.fuelprices.view
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.ScaleGestureDetector.OnScaleGestureListener
 import android.view.View
-import android.view.View.OnClickListener
-import android.widget.AdapterView
+import android.widget.*
 import android.widget.AdapterView.OnItemSelectedListener
-import android.widget.ArrayAdapter
-import android.widget.Button
-import android.widget.Spinner
+import androidx.appcompat.app.AppCompatActivity
 import com.iparcoc.fuelprices.data.APIService
 import com.iparcoc.fuelprices.data.FuelPricesApplication
-import com.iparcoc.fuelprices.data.Preferences
 import com.iparcoc.fuelprices.databinding.ActivityPreferencesBinding
 import com.iparcoc.fuelprices.model.CCAA
 import com.iparcoc.fuelprices.model.Municipality
@@ -50,8 +44,10 @@ class PreferencesActivity : AppCompatActivity() {
                 FuelPricesApplication.preferences.saveMunicipality(municipalitySelect)
                 FuelPricesApplication.preferences.saveProduct(productSelect)
                 FuelPricesApplication.preferences.saveUserName(binding.etUserName.text.toString())
-            }
 
+                Toast.makeText(applicationContext, "Se han guardado las preferencias", Toast.LENGTH_LONG).show()
+                finish()
+            }
         })
     }
 
